@@ -1,0 +1,50 @@
+<div class="min-h-screen bg-gradient-to-br from-gray-900 via-sky-900 to-black p-4 sm:p-6 md:p-10 text-white font-sans flex items-center justify-center">
+  <div class="w-full max-w-md bg-white/10 border border-white/20 rounded-2xl p-6 sm:p-8 shadow-lg">
+
+    <h1 class="text-center text-3xl sm:text-4xl font-bold mb-6">
+      <i class="bi bi-people-fill text-white"></i> Employee Management
+    </h1>
+
+    <h2 class="text-2xl sm:text-3xl font-bold mb-4 text-center">
+      <i class="bi bi-person-circle"></i> Register Account
+    </h2>
+
+    <form (ngSubmit)="register()" class="space-y-4">
+
+      <input 
+        [(ngModel)]="registerData.name" 
+        name="regName" 
+        placeholder="Full Name"
+        class="w-full rounded-lg bg-white/10 text-white px-4 py-3 text-sm sm:text-base focus:outline-none focus:ring-2 focus:ring-sky-400" 
+      />
+
+      <input 
+        [(ngModel)]="registerData.email" 
+        name="regEmail" 
+        placeholder="Email"
+        class="w-full rounded-lg bg-white/10 text-white px-4 py-3 text-sm sm:text-base focus:outline-none focus:ring-2 focus:ring-sky-400" 
+      />
+
+      <input 
+        [(ngModel)]="registerData.password" 
+        name="regPassword" 
+        type="password" 
+        placeholder="Password"
+        class="w-full rounded-lg bg-white/10 text-white px-4 py-3 text-sm sm:text-base focus:outline-none focus:ring-2 focus:ring-sky-400" 
+      />
+
+      <button 
+        type="submit"
+        class="bg-sky-600 w-full py-3 text-sm sm:text-base font-semibold rounded-xl hover:bg-sky-700 active:scale-95 transition transform shadow-md cursor-pointer"
+      >
+        Register
+      </button>
+
+      <p class="text-gray-300 text-xs sm:text-sm text-center">
+        Already have an account?
+        <a (click)="goToLogin()" class="text-sky-400 cursor-pointer hover:underline active:text-sky-200">Login</a>
+      </p>
+    </form>
+
+  </div>
+</div>

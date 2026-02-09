@@ -1,0 +1,184 @@
+<div class="min-h-screen bg-gradient-to-br from-gray-900 via-sky-900 to-black p-4 sm:p-6 md:p-10 text-white font-sans">
+
+  <!-- ================= Top Bar ================= -->
+  <div class="flex flex-col md:flex-row justify-between items-start md:items-center mb-8 gap-4">
+    <h2 class="text-xl sm:text-2xl font-extrabold">
+      Welcome, <span class="font-semibold">{{ authUser.name }}</span>
+      <i class="bi bi-heart-fill text-red-500 pl-2"></i>
+    </h2>
+    <button (click)="logout()"
+      class="bg-red-500 px-4 py-2 rounded hover:bg-red-600 text-sm flex items-center gap-1">
+      <i class="bi bi-box-arrow-right"></i> Logout
+    </button>
+  </div>
+
+  <!-- ================= Add Employee Form ================= -->
+  <div class="bg-white/10 rounded-xl p-4 sm:p-6 border border-white/20 shadow-lg mb-6">
+    <button (click)="toggleForm(true)" *ngIf="!showForm"
+      class="bg-sky-600 px-4 py-2 rounded hover:bg-sky-700 text-sm cursor-pointer mb-4">
+      + Add Employee
+    </button>
+
+    <form *ngIf="showForm" (ngSubmit)="onSubmit()" #empForm="ngForm" novalidate
+      class="grid grid-cols-1 md:grid-cols-2 gap-4 mt-2">
+
+      <!-- Name -->
+      <div>
+        <input [(ngModel)]="employee.name" type="text" name="name" placeholder="Enter Name" required
+          class="rounded bg-white/10 px-3 py-2 text-sm text-white w-full focus:outline-none focus:ring-2 focus:ring-sky-400" />
+        <div *ngIf="empForm.submitted && !employee.name" class="text-red-400 text-xs mt-1">Name is required</div>
+      </div>
+
+      <!-- Email -->
+      <div>
+        <input [(ngModel)]="employee.email" type="email" name="email" placeholder="Enter Email" required
+          class="rounded bg-white/10 px-3 py-2 text-sm text-white w-full focus:outline-none focus:ring-2 focus:ring-sky-400" />
+        <div *ngIf="empForm.submitted && !employee.email" class="text-red-400 text-xs mt-1">Email is required</div>
+        <div *ngIf="empForm.submitted && employee.email && (!employee.email.includes('@') || !employee.email.includes('.'))"
+          class="text-red-400 text-xs mt-1">Please enter a valid email</div>
+      </div>
+
+      <!-- Role -->
+      <div>
+        <select [(ngModel)]="employee.role" name="role" required
+          class="rounded bg-white/10 px-3 py-2 text-sm text-white w-full appearance-none focus:outline-none focus:ring-2 focus:ring-sky-400">
+          <option value="" disabled selected class="text-gray-400 bg-gray-800">Select Role</option>
+          <option class="text-black">Manager</option>
+          <option class="text-black">Developer</option>
+          <option class="text-black">Designer</option>
+          <option class="text-black">HR</option>
+        </select>
+        <div *ngIf="empForm.submitted && !employee.role" class="text-red-400 text-xs mt-1">Role is required</div>
+      </div>
+
+      <!-- Gender -->
+      <div>
+        <select [(ngModel)]="employee.gender" name="gender" required
+          class="rounded bg-white/10 px-3 py-2 text-sm text-white w-full appearance-none focus:outline-none focus:ring-2 focus:ring-sky-400">
+          <option value="" disabled selected class="text-gray-400 bg-gray-800">Select Gender</option>
+          <option class="text-black">Male</option>
+          <option class="text-black">Female</option>
+          <option class="text-black">Other</option>
+        </select>
+        <div *ngIf="empForm.submitted && !employee.gender" class="text-red-400 text-xs mt-1">Gender is required</div>
+      </div>
+
+      <!-- Salary -->
+      <div>
+        <input [(ngModel)]="employee.salary" type="number" name="salary" placeholder="Enter Salary" required min="1"
+          max="9999999"
+          class="rounded bg-white/10 px-3 py-2 text-sm text-white w-full focus:outline-none focus:ring-2 focus:ring-sky-400" />
+        <div *ngIf="empForm.submitted && (!employee.salary || employee.salary <= 0)" class="text-red-400 text-xs mt-1">
+          Salary must be greater than 0
+        </div>
+        <div *ngIf="empForm.submitted && !employee.salary" class="text-red-400 text-xs mt-1">Salary is required</div>
+      </div>
+
+      <!-- Phone -->
+      <div>
+        <input [(ngModel)]="employee.contact" type="number" name="contact" placeholder="Enter Phone Number" required
+          class="rounded bg-white/10 px-3 py-2 text-sm text-white w-full focus:outline-none focus:ring-2 focus:ring-sky-400" />
+        <div *ngIf="empForm.submitted && !employee.contact" class="text-red-400 text-xs mt-1">Phone number is required</div>
+      </div>
+
+      <!-- Buttons -->
+      <div class="col-span-1 md:col-span-2 flex justify-end gap-3">
+        <button type="submit"
+          class="bg-green-600 px-4 py-2 rounded hover:bg-green-700 text-sm cursor-pointer">Save</button>
+        <button type="button" (click)="toggleForm(false)"
+          class="bg-gray-600 px-4 py-2 rounded hover:bg-gray-700 text-sm cursor-pointer">Cancel</button>
+      </div>
+    </form>
+  </div>
+
+  <!-- ================= Employee Table ================= -->
+  <div class="overflow-x-auto rounded-lg shadow-inner">
+    <table class="w-full border-collapse text-left text-sm md:text-base">
+      <thead>
+        <tr class="bg-white/10 border-b border-white/20 text-sky-300 text-xs sm:text-sm">
+          <th class="p-2 sm:p-3">Sr No.</th>
+          <th class="p-2 sm:p-3">Name</th>
+          <th class="p-2 sm:p-3">Email</th>
+          <th class="p-2 sm:p-3">Role</th>
+          <th class="p-2 sm:p-3">Gender</th>
+          <th class="p-2 sm:p-3">Salary</th>
+          <th class="p-2 sm:p-3">Phone no.</th>
+          <th class="p-2 sm:p-3">Actions</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let emp of employees; let i = index" class="border-b border-white/10 hover:bg-white/5 text-xs sm:text-sm">
+          <td class="p-2 sm:p-3">{{ i + 1 }}</td>
+          <td class="p-2 sm:p-3">{{ emp.name }}</td>
+          <td class="p-2 sm:p-3">{{ emp.email }}</td>
+          <td class="p-2 sm:p-3">{{ emp.role }}</td>
+          <td class="p-2 sm:p-3">{{ emp.gender }}</td>
+          <td class="p-2 sm:p-3">{{ emp.salary }}</td>
+          <td class="p-2 sm:p-3">{{ emp.contact }}</td>
+          <td class="p-2 sm:p-3 space-x-1 sm:space-x-2 flex flex-wrap gap-1">
+            <button (click)="editEmployee(emp)"
+              class="bg-yellow-500 px-2 py-1 rounded text-xs hover:bg-yellow-600 cursor-pointer">Edit</button>
+            <button (click)="deleteEmployee(emp.id)"
+              class="bg-red-500 px-2 py-1 rounded text-xs hover:bg-red-600 cursor-pointer">Delete</button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+</div>
+
+<!-- ================= Edit Employee Modal ================= -->
+<div *ngIf="showModal" class="fixed inset-0 bg-black/50 flex items-center justify-center z-50 p-4 sm:p-6">
+  <div class="bg-gray-900 text-white rounded-xl shadow-lg w-full max-w-md p-6 relative">
+    <button (click)="closeModal()"
+      class="absolute top-3 right-3 text-gray-400 hover:text-white text-xl cursor-pointer">
+      <i class="bi bi-x-octagon"></i>
+    </button>
+    <h2 class="text-xl sm:text-2xl font-bold mb-4 text-center">Edit Employee</h2>
+
+    <form (ngSubmit)="updateEmployee()" #editForm="ngForm" class="grid grid-cols-1 gap-4">
+      <input [(ngModel)]="editRecord.name" name="editName" required placeholder="Enter full name"
+        class="rounded bg-white/10 px-3 py-2 text-sm sm:text-base text-white focus:outline-none focus:ring-2 focus:ring-sky-400" />
+
+      <input [(ngModel)]="editRecord.email" name="editEmail" required placeholder="Enter email address"
+        class="rounded bg-white/10 px-3 py-2 text-sm sm:text-base text-white focus:outline-none focus:ring-2 focus:ring-sky-400" />
+
+      <select [(ngModel)]="editRecord.role" name="editRole" required
+        class="rounded bg-white/10 px-3 py-2 text-sm sm:text-base text-white w-full appearance-none focus:outline-none focus:ring-2 focus:ring-sky-400">
+        <option value="" disabled selected class="text-gray-400 bg-gray-800">Select Role</option>
+        <option class="text-black">Manager</option>
+        <option class="text-black">Developer</option>
+        <option class="text-black">Designer</option>
+        <option class="text-black">HR</option>
+      </select>
+
+      <select [(ngModel)]="editRecord.gender" name="editGender" required
+        class="rounded bg-white/10 px-3 py-2 text-sm sm:text-base text-white w-full appearance-none focus:outline-none focus:ring-2 focus:ring-sky-400">
+        <option value="" disabled selected class="text-gray-400 bg-gray-800">Select Gender</option>
+        <option class="text-black">Male</option>
+        <option class="text-black">Female</option>
+        <option class="text-black">Other</option>
+      </select>
+
+      <input [(ngModel)]="editRecord.salary" name="editSalary" required type="number" placeholder="Enter salary"
+        min="1"
+        class="rounded bg-white/10 px-3 py-2 text-sm sm:text-base text-white focus:outline-none focus:ring-2 focus:ring-sky-400" />
+
+      <input [(ngModel)]="editRecord.contact" name="editContact" required pattern="^[0-9]{11}$"
+        placeholder="Enter phone number" maxlength="11"
+        class="rounded bg-white/10 px-3 py-2 text-sm sm:text-base text-white focus:outline-none focus:ring-2 focus:ring-sky-400" />
+
+      <div class="flex flex-col sm:flex-row justify-center gap-3 mt-4">
+        <button type="submit"
+          class="bg-sky-600 text-white px-5 py-2 rounded hover:bg-sky-700 transition text-sm sm:text-base shadow-md cursor-pointer w-full sm:w-auto">
+          Save
+        </button>
+        <button type="button" (click)="closeModal()"
+          class="bg-red-600 text-white px-5 py-2 rounded hover:bg-red-500 transition text-sm sm:text-base cursor-pointer w-full sm:w-auto">
+          Cancel
+        </button>
+      </div>
+    </form>
+  </div>
+</div>

@@ -1,63 +1,52 @@
-<<<<<<< HEAD
-# Crud
+# 👨‍💼 Employee Management System – Angular CRUD Project
 
-This project was generated using [Angular CLI](https://github.com/angular/angular-cli) version 20.3.2.
+This project is a **complete CRUD-based Employee Management System** built during my internship using **Angular, TypeScript, Tailwind CSS, Mock API, and SweetAlert**.  
+It demonstrates real-world front-end development skills, including routing, API integration, authentication, and clean UI design.
 
-## Development server
+---
 
-To start a local development server, run:
+## 🎯 Key Features
+- ✅ **CRUD Operations**: Create, Read, Update, Delete employees  
+- 🔗 **Routing & Navigation** across modules  
+- 🌐 **API Integration** for dynamic data using Mock API  
+- 🛡️ **Login & Signup Authentication Modules**  
+- 🎨 Clean and modern UI with **Tailwind CSS**  
+- ⚡ **SweetAlert** for interactive notifications and confirmations  
 
-```bash
-ng serve
-```
+---
 
-Once the server is running, open your browser and navigate to `http://localhost:4200/`. The application will automatically reload whenever you modify any of the source files.
+## 🛠️ Technologies Used
+- **Angular**  
+- **TypeScript**  
+- **Tailwind CSS**  
+- **Mock API**  
+- **SweetAlert**  
+- **HTML5 & CSS3**  
+- **CRUD & RESTful Concepts**  
 
-## Code scaffolding
+---
 
-Angular CLI includes powerful code scaffolding tools. To generate a new component, run:
+## 📸 Screenshots
 
-```bash
-ng generate component component-name
-```
+<img width="1322" height="602" alt="image" src="https://github.com/user-attachments/assets/2b699ceb-0229-4ec6-af65-91151db158bf" />
 
-For a complete list of available schematics (such as `components`, `directives`, or `pipes`), run:
+---
 
-```bash
-ng generate --help
-```
+## 📂 Installation & Setup
 
-## Building
+To run this project locally:
 
-To build the project run:
+1. Clone the repository
+   ```bash
+   git clone https://github.com/your-username/employee-management.git
+2. Navigate to the project directory
+   ```bash
+     cd employee-management
 
-```bash
-ng build
-```
+3. Install dependencies
+    ```bash
+        npm install
 
-This will compile your project and store the build artifacts in the `dist/` directory. By default, the production build optimizes your application for performance and speed.
-
-## Running unit tests
-
-To execute unit tests with the [Karma](https://karma-runner.github.io) test runner, use the following command:
-
-```bash
-ng test
-```
-
-## Running end-to-end tests
-
-For end-to-end (e2e) testing, run:
-
-```bash
-ng e2e
-```
-
-Angular CLI does not come with an end-to-end testing framework by default. You can choose one that suits your needs.
-
-## Additional Resources
-
-For more information on using the Angular CLI, including detailed command references, visit the [Angular CLI Overview and Command Reference](https://angular.dev/tools/cli) page.
-=======
-# Employee-Management
->>>>>>> 064e0f2d8ffa7656661449bf540b77a8cff0f542
+4. Start the development server
+     ```bash
+          ng serve
